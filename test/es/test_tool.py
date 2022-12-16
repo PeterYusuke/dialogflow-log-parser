@@ -1,25 +1,24 @@
 import os
-import sys
+import json
 from unittest import TestCase
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..'))
-import json 
 from dialogflow_log_parser.es import response_to_dict
 
 BASE_TEST_DATA_DIR = 'test/es/data/'
+
 
 class MainTest(TestCase):
     maxDiff = None
 
     BASE_TEST_DATA_DIR = 'test/es/data/'
-    
+
     def get_conf_file(self, file_name):
         file_dir = os.path.join(self.BASE_TEST_DATA_DIR, 'response', file_name)
         with open(file_dir) as f:
             return f.read()
 
     def get_dest_file(self, file_name):
-        file_dir = os.path.join(self.BASE_TEST_DATA_DIR, 'destination', file_name)
+        file_dir = os.path.join(self.BASE_TEST_DATA_DIR,
+                                'destination', file_name)
         with open(file_dir) as f:
             return f.read()
 
