@@ -20,4 +20,5 @@ setuptools.setup(
     ],
     keywords='dialogflow parse log hocon',
     long_description=readme,
+    long_description_content_type="text/markdown",
 )

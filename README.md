@@ -9,9 +9,12 @@ This module parses dialogflow logs into python dictionary type.
 
 ## Example usage
 pip
-    pip install dialogflow-log-parser
+```
+pip install dialogflow-log-parser
+```
 
-```py
+python
+```python
 from dialogflow_log_parser.es import response_to_dict
 
 # store log string
