@@ -1,5 +1,8 @@
 import setuptools
 
+with open('README.md', 'r', encoding='utf-8') as f:
+    readme = f.read()
+
 setuptools.setup(
     name='dialogflow-log-parser',
     version='0.0.1',
@@ -16,4 +19,5 @@ setuptools.setup(
         'pyhocon==0.3.59'
     ],
     keywords='dialogflow parse log hocon',
+    long_description=readme,
 )
