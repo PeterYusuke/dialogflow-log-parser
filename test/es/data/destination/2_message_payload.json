@@ -1,0 +1,61 @@
+{
+  "id": "response_id",
+  "lang": "ja",
+  "session_id": "dfMessenger-session-id",
+  "timestamp": "2000-01-01T01:00:21.720007Z",
+  "result": {
+    "source": "agent",
+    "resolved_query": "WELCOME",
+    "action": "input.welcome",
+    "score": 1.0,
+    "parameters": [],
+    "metadata": {
+      "intent_id": "intent_id",
+      "intent_name": "Default Welcome Intent",
+      "webhook_used": "false",
+      "webhook_for_slot_filling_used": "false",
+      "is_fallback_intent": "false"
+    },
+    "fulfillment": {
+      "speech": "response speech",
+      "messages": [
+        {
+          "lang": "ja",
+          "type": 0.0,
+          "speech": "response speech"
+        },
+        {
+          "payload": {
+            "richContent": [
+              [
+                {
+                  "type": "chips",
+                  "options": [
+                    {
+                      "text": "chip 1"
+                    },
+                    {
+                      "text": "chip 2"
+                    },
+                    {
+                      "text": "chip 3"
+                    },
+                    {
+                      "text": "chip 4"
+                    }
+                  ]
+                }
+              ]
+            ]
+          },
+          "lang": "ja",
+          "type": 4.0
+        }
+      ]
+    }
+  },
+  "status": {
+    "code": 200,
+    "error_type": "success"
+  }
+}

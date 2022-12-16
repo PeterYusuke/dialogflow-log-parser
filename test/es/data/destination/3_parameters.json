@@ -1,0 +1,103 @@
+{
+  "id": "response_id",
+  "lang": "ja",
+  "session_id": "dfMessenger-session-id",
+  "timestamp": "2000-01-01T00:30:28.000038Z",
+  "result": {
+    "source": "agent",
+    "resolved_query": "resolved query string",
+    "score": 1.0,
+    "parameters": [
+      {
+        "parameter-1": ""
+      },
+      {
+        "parameter-2": "paramvalue2"
+      },
+      {
+        "parameter-3": ""
+      },
+      {
+        "parameter-4": "paramvalue4"
+      }
+    ],
+    "metadata": {
+      "intent_id": "intent_id",
+      "webhook_response_time": 151,
+      "intent_name": "intent-name",
+      "webhook_used": "false",
+      "webhook_for_slot_filling_used": "false",
+      "is_fallback_intent": "false"
+    },
+    "fulfillment": {
+      "speech": "response string 1\\nresponse string 2",
+      "messages": [
+        {
+          "type": 0.0,
+          "speech": "response string 11\\n response string 22"
+        },
+        {
+          "payload": {
+            "richContent": [
+              [
+                {
+                  "type": "description",
+                  "text": [
+                    "text 1",
+                    "text 2",
+                    "text 3"
+                  ],
+                  "title": "titie string"
+                },
+                {
+                  "type": "description",
+                  "text": [
+                    "text 22",
+                    "text 23",
+                    "text 24",
+                    "text 25",
+                    "text 26",
+                    "text 27"
+                  ],
+                  "title": "title string2"
+                }
+              ]
+            ]
+          },
+          "type": 4.0
+        },
+        {
+          "type": 0.0,
+          "speech": "string response 3"
+        },
+        {
+          "payload": {
+            "richContent": [
+              [
+                {
+                  "type": "chips",
+                  "options": [
+                    {
+                      "text": "chips 1"
+                    },
+                    {
+                      "text": "chips 22"
+                    },
+                    {
+                      "text": "chips 23"
+                    }
+                  ]
+                }
+              ]
+            ]
+          },
+          "type": 4.0
+        }
+      ]
+    }
+  },
+  "status": {
+    "code": 200,
+    "error_type": "success"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "response_id",
+  "lang": "ja",
+  "session_id": "dfMessenger-session-id",
+  "timestamp": "2000-01-01T00:30:28.000038Z",
+  "result": {
+    "source": "agent",
+    "resolved_query": "resolved query string",
+    "score": 0.76514167,
+    "parameters": [
+      {
+        "parameter-key1": "parameterval1"
+      }
+    ],
+    "contexts": [
+      {
+        "name": "yes-or-no",
+        "lifespan": 1,
+        "parameters": [
+          {
+            "parameter-key1": "parameterval1"
+          },
+          {
+            "parameter-key1.original": "parameterorigin1"
+          }
+        ]
+      },
+      {
+        "name": "yes",
+        "lifespan": 1,
+        "parameters": [
+          {
+            "parameter-key1": "parameterval1"
+          },
+          {
+            "parameter-key1.original": "parameterorigin1"
+          }
+        ]
+      },
+      {
+        "name": "__system_counters__",
+        "lifespan": 1,
+        "parameters": [
+          {
+            "no-input": 0.0
+          },
+          {
+            "no-match": 0.0
+          },
+          {
+            "parameter-key1": "parameterval1"
+          },
+          {
+            "parameter-key1.original": "parameterorigin1"
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "intent_id": "intent_id",
+      "intent_name": "Intent name",
+      "webhook_used": "false",
+      "webhook_for_slot_filling_used": "false",
+      "is_fallback_intent": "false"
+    },
+    "fulfillment": {
+      "speech": "response string 1\\nresponse string 2\\n\\nresponse string 3",
+      "messages": [
+        {
+          "lang": "ja",
+          "type": 0.0,
+          "speech": "response string 1\\nresponse string 2\\n\\nresponse string 3"
+        },
+        {
+          "lang": "ja",
+          "type": 0.0,
+          "speech": "select below"
+        },
+        {
+          "payload": {
+            "richContent": [
+              [
+                {
+                  "type": "chips",
+                  "options": [
+                    {
+                      "text": "yes"
+                    },
+                    {
+                      "text": "no"
+                    }
+                  ]
+                }
+              ]
+            ]
+          },
+          "lang": "ja",
+          "type": 4.0
+        }
+      ]
+    }
+  },
+  "status": {
+    "code": 200,
+    "error_type": "success"
+  }
+}
