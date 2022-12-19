@@ -42,13 +42,20 @@ jobs:
   coveralls:
     docker:
       # replace with your preferred image
-      - image: cimg/python:3.10.2
+      - image: cimg/python:3.10-node
     steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Coverage test
+          # This assumes pytest is installed via the install-package step above
+          command: coverage run -m pytest && coverage lcov
       - coveralls/upload:
           parallel: false 
           parallel_finished: false 
           verbose: false 
-          path_to_lcov: ./coverage/lcov/project.lcov 
+          path_to_lcov: ./coverage.lcov
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
