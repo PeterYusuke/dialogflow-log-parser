@@ -1,4 +1,6 @@
 # dialogflow-log-parser
+[![Coverage Status](https://coveralls.io/repos/github/PeterYusuke/dialogflow-log-parser/badge.svg?branch=main)](https://coveralls.io/github/PeterYusuke/dialogflow-log-parser?branch=main)
+
 A module for dialogflow log parser
 
 Only response textPaylod from dialogflow ES log file can be parsed into dict object. 
