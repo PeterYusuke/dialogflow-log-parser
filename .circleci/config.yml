@@ -10,6 +10,7 @@ orbs:
   # so you dont have to copy and paste it everywhere.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.5.0
+  coveralls: coveralls/coveralls@1.0.6
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -38,6 +39,17 @@ jobs:
           # This assumes pytest is installed via the install-package step above
           command: pytest
 
+  coveralls:
+    docker:
+      # replace with your preferred image
+      - image: cimg/python:3.10.2
+    steps:
+      - coveralls/upload:
+          parallel: false 
+          parallel_finished: false 
+          verbose: false 
+          path_to_lcov: ./coverage/lcov/project.lcov 
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -45,3 +57,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - coveralls
