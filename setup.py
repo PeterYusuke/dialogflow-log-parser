@@ -4,12 +4,12 @@ with open('README.md', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 setuptools.setup(
-    name='dialogflow-log-parser',
+    name='dialogflow_log_parser',
     version='0.0.1',
     author='Peter Yusuke',
     author_email='yyamashita1201@gmail.com',
     description='parse dialogflow log string',
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=['test', 'test.*']),
     url='https://github.com/PeterYusuke/dialogflow-log-parser',
     classifiers=[
         'License :: OSI Approved :: Apache Software License',
