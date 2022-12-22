@@ -1,0 +1,281 @@
+openapi: 3.0.3
+info:
+  version: 0.0.1
+  title: dialogflow-log-parser
+  description: |-
+    This is a json format data that describe return values.
+    Each function will return these format.
+
+tags:
+  - name: es
+    description: es module
+paths:
+  /response_to_dict:
+    get:
+      tags:
+        - es
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'  
+
+components:
+  schemas:
+    Response:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1234-abcd
+          description: response id
+        lang:
+          type: string
+          example: en
+          description: langage
+        session_id:
+          type: string
+          example: 1234-abcd
+          description: session id
+        timestamp:
+          type: string
+          format: date-time
+          example: 2020-12-30T01:57:09.210851Z
+          pattern: ISO 8061
+        result:
+          $ref: '#/components/schemas/ResponseResult'
+        status:
+          $ref: '#/components/schemas/Status'
+        sentiment_analysis_result:
+          $ref: '#/components/schemas/SentimentAnalysis'
+      required: 
+        - id
+        - lang
+        - session_id
+        - timestamp
+        - result
+        - status
+
+    ResponseResult:
+      type: object
+      properties:
+        source: 
+          type: string
+          example: agent
+        resolved_query:
+          type: string
+          example: hello
+          description: user utterance
+        action:
+          type: string
+          example: WELCOME
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+          example: 0.87177813
+        parameters:
+          type: array
+          items:
+            anyOf: 
+              - $ref : '#/components/schemas/Parameter'
+              - $ref : '#/components/schemas/ParameterNum'
+              - $ref : '#/components/schemas/ParameterList'
+        contexts:
+          type: array
+          items:
+            $ref : '#/components/schemas/Context'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        fulfillment:
+          $ref: '#/components/schemas/Fulfillment'
+      required: 
+        - source
+        - resolved_query
+        - score
+        - parameters
+        - metadata
+        - fulfillment
+
+    Parameter:
+      type: object
+      properties:
+        parameter-key:
+          type: string
+          example: parameter-value
+          description: this key and value pair will the entities
+
+    ParameterNum:
+      type: object
+      properties:
+        parameternum-key:
+          type: number
+          example: 1.1
+          description: this key and value pair will the entities
+
+    ParameterList:
+      type: object
+      properties:
+        parameterlist-key:
+          type: array
+          items: 
+            type: string
+            example: parameter-value1, parameter-value2
+    
+    Context: 
+      type: object
+      properties:
+        name:
+          type: string
+          example: context-name
+          description: context name
+        lifespan:
+          type: integer
+          example: 1
+          description: lifespan of context
+        parameters:
+          type: array
+          items:
+            anyOf: 
+              - $ref : '#/components/schemas/Parameter'
+              - $ref : '#/components/schemas/ParameterNum'
+              - $ref : '#/components/schemas/ParameterList'
+      required: 
+        - naem
+        - lifespan
+
+    Metadata:
+      type: object
+      properties: 
+        intent_id: 
+          type: string
+          example: 1234-abcd
+          description: intent id
+        webhook_response_time:
+          type: integer
+          example: 100
+          description: seconds of webhook response
+        intent_name:
+          type: string
+          example: intent name
+          description: intent name
+        webhook_used:
+          type: boolean
+          example: false
+        webhook_for_slot_filling_used:
+          type: boolean
+          example: false
+        is_fallback_intent: 
+          type: boolean
+          example: false
+        original_webhook_payload:
+          type: string
+          example : "{\n}"
+          description: original json string of payload 
+        original_webhook_body:
+          type: string
+          example: "{\n}"
+          description: original json string of webhook body
+      required:
+        - intent_id
+        - intent_name
+
+    Fulfillment:
+      type: object
+      properties:
+        speech:
+          type: string
+          example: speech string
+        messages:
+          type: array
+          items:
+            anyOf: 
+              - $ref : '#/components/schemas/Message'
+              - $ref : '#/components/schemas/Payload'
+        data:
+          type: array
+          items:
+             $ref : '#/components/schemas/Data'
+      required: 
+        - speech
+        
+    Message:
+      type: object
+      properties:
+        lang:
+          type: string
+          example: "en"
+        type:
+          type: number
+          example: 0.0
+        speech:
+          type: string
+          example: speech string
+          description: the string of chatbot showed
+      required: 
+        - lang
+        - type
+        - speech
+        
+    Payload:
+      type: object
+      properties: 
+        payload: 
+          type: object
+          properties:
+            richContent:
+              type: array
+              items:
+                type: array
+                items:
+                  type: object
+                  description: rich response json
+                  example: {"rich-response-key": rich-response-value}
+        type:
+          type: number
+          example: 4.1
+      required: 
+        - payload
+        - type
+
+    Data:
+      type: object
+      properties:
+        richContent:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+              description: rich response json
+              example: {"rich-response-key": rich-response-value}
+    
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        error_type:
+          type: string
+          example: success
+      required: 
+        - code
+        - error_type
+
+    SentimentAnalysis:
+      type: object
+      properties: 
+        query_text_sentiment:
+          type: object
+          properties: 
+            score: 
+              type: number
+              example: 0.3
+            magnitude:
+              type: number
+              example: 0.4
+      required: 
+        - query_text_sentiment
