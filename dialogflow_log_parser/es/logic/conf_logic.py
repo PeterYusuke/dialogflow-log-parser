@@ -31,6 +31,7 @@ class ResponseConfLogic(BaseConfLogic):
             ValuesConfLogic,
             ContextsConfLogic,
             FieldsConfLogic,
+            DataConfLogic,
         ]
 
         conf_list_result = conf_list
@@ -163,7 +164,6 @@ class DuplicatedConfLogic():
         )
         return result_list
 
-
     def get_continue_start_indices(self, fields_start_end_indices):
         if len(fields_start_end_indices) < 1:
             return []
@@ -294,7 +294,7 @@ class FieldsConfLogic(DuplicatedConfLogic):
         start_indices = self.get_continue_start_indices(start_end_pairs)
 
         result = self.replace_fields_key(conf_list, start_indices)
-        
+
         return result
 
     def replace_fields_key(self, conf_list, start_indices):
@@ -324,3 +324,24 @@ class FieldsConfLogic(DuplicatedConfLogic):
             result.append((start_index, end_index))
             start_index = end_index + 1
         return result
+
+
+class DataConfLogic(DuplicatedConfLogic):
+    def modify_conf_list(self, conf_list: list[str]) -> list[str]:
+        """modify data duplicated list"""
+        start_indices = self.get_indeices_of_regex(
+            conf_list, pattern=r'\s{1,}data\s{1,}{')
+
+        start_end_pairs = self.get_curly_brace_pair_indices(
+            conf_list, start_indices)
+
+        return self.replace_duplicate_key(
+            conf_list,
+            start_end_pairs,
+            inside_pattern=r'data(\s{1,}{)',
+            inside_replace_pattern='\\1',
+            edge_start_pattern=r'(data)\s{1,}{',
+            edge_start_replece_pattern='\\1: [',
+            edge_end_pattern=r'(\s{1,})}',
+            edge_end_replace_pattern='\\1]'
+        )

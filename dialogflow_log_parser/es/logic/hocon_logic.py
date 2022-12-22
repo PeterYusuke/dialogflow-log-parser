@@ -2,6 +2,7 @@ from pyhocon.config_tree import ConfigTree
 from pyhocon.converter import HOCONConverter
 from .dict_logic import ResponseDictLogic
 
+
 class BaseHoconLogic():
     def __init__(self) -> None:
         pass
@@ -24,6 +25,13 @@ class BaseHoconLogic():
             .get('parameters', None)
         return parameters is not None
 
+    def has_data(self, hocon: ConfigTree):
+        messages = hocon \
+            .get('result', ConfigTree()) \
+            .get('fulfillment', ConfigTree()) \
+            .get('data', None)
+        return messages is not None
+
 
 class ResponseHoconLogic(BaseHoconLogic):
     def __init__(self) -> None:
@@ -42,6 +50,11 @@ class ResponseHoconLogic(BaseHoconLogic):
         if self.has_parameters(hocon):
             hocon['result']['parameters'] \
                 = self.get_parameter_obj(hocon['result']['parameters'])
+
+        if self.has_data(hocon):
+            hocon['result']['fulfillment']['data'] \
+                = self.get_data_value(hocon)
+
         return hocon
 
     def get_messages_value(self, conf: ConfigTree):
@@ -55,11 +68,30 @@ class ResponseHoconLogic(BaseHoconLogic):
                 messages_list.append(message)
         return messages_list
 
+    def get_data_value(self, conf: ConfigTree):
+        data_list = []
+        for data in conf['result']['fulfillment']['data']:
+            data_list.append(self.get_data_obj(data))
+        return data_list
+
+    def get_data_obj(self, hocon):
+        '''
+        dataの中身を取得する
+        '''
+
+        field = hocon.get('fields')[0]
+        key = field.get('key')
+        value = field.get('value')
+        fields_value = self.get_field_value(value)
+        hocon = ConfigTree({key: fields_value})
+
+        return hocon
+
     def get_payload_obj(self, hocon):
         '''
         payloadの中身を取得する
         '''
-        
+
         field = hocon['payload'].get('fields')[0]
         key = field.get('key')
         value = field.get('value')
@@ -88,7 +120,17 @@ class ResponseHoconLogic(BaseHoconLogic):
             return value_hocon['string_value']
         if value_hocon.get('number_value', False) is not False:
             return value_hocon['number_value']
+        if value_hocon.get('list_value', False) is not False:
+            return self.get_inside_list_value(value_hocon['list_value'])
         return None
+
+    def get_inside_list_value(self, list_value_hocon: ConfigTree):
+        values = []
+        if list_value_hocon.get('values', False) is False:
+            return []
+        for value in list_value_hocon['values']:
+            values.append(self.get_inside_value(value))
+        return values
 
     def get_parameter_obj(self, parameter_hocon: ConfigTree):
         result = []
