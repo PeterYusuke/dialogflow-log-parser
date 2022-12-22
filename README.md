@@ -28,7 +28,8 @@ response_dict = response_to_dict(textPayload)
 ```
 
 ## Example of file and parsed object(json)
-Please check test/es/data folder, so that you can know what kind of dictionary will you get.
+Please check test/es/data folder, so that you can know what kind of dictionary you get.  
+Also use swagger.yml file in  [swagger editor](https://editor.swagger.io/) to see the entire response json data.
 
 Log file
 ```conf
