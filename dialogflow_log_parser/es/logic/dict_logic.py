@@ -19,18 +19,29 @@ class ResponseDictLogic(BaseDictLogic):
             return value['string_value']
         if value.get('number_value', False) is not False:
             return value['number_value']
+        if value.get('list_value') is not False:
+            return self.get_inside_list_value(value['list_value'])
         return None
+
+    def get_inside_list_value(self, list_value: dict):
+        values = []
+        if list_value.get('values', False) is False:
+            return values
+
+        for value in list_value.get('values'):
+            values.append(self.get_inside_value(value))
+        return values
 
     def get_contexts_dict(self, contexts: list[dict]) -> dict:
         result = []
         for context in contexts:
             if context.get('parameters', False) is False:
                 continue
-            
+
             context_copy = context.copy()
 
             parameters = []
-            fields = context_copy.get('parameters').get('fields',[])
+            fields = context_copy.get('parameters').get('fields', [])
             for field in fields:
                 key = field.get('key')
                 value = self.get_inside_value(field.get('value'))

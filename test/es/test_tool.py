@@ -57,3 +57,30 @@ class MainTest(TestCase):
         dest_dict = json.loads(dest)
 
         self.assertDictEqual(response_dict, dest_dict)
+
+    def test_parameter_list(self):
+        response = self.get_conf_file('5_parameter_list.conf')
+        dest = self.get_dest_file('5_parameter_list.json')
+
+        response_dict = response_to_dict(response)
+        dest_dict = json.loads(dest)
+
+        self.assertDictEqual(response_dict, dest_dict)
+
+    def test_multi_parameter_list(self):
+        response = self.get_conf_file('6_multi_parameter_list.conf')
+        dest = self.get_dest_file('6_multi_parameter_list.json')
+
+        response_dict = response_to_dict(response)
+        dest_dict = json.loads(dest)
+
+        self.assertDictEqual(response_dict, dest_dict)
+
+    def test_data_key(self):
+        response = self.get_conf_file('7_data_key.conf')
+        dest = self.get_dest_file('7_data_key.json')
+
+        response_dict = response_to_dict(response)
+        dest_dict = json.loads(dest)
+
+        self.assertDictEqual(response_dict, dest_dict)
