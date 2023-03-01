@@ -19,8 +19,21 @@ class ResponseDictLogic(BaseDictLogic):
             return value['string_value']
         if value.get('number_value', False) is not False:
             return value['number_value']
-        if value.get('list_value') is not False:
+        if value.get('list_value', False) is not False:
             return self.get_inside_list_value(value['list_value'])
+        if value.get('struct_value', False) is not False:
+            return self.get_struct_value(value['struct_value'])
+        return None
+
+    def get_struct_value(self, struct_value: list[dict]):
+        if struct_value.get('fields', False) is not False:
+            fields_list = {}
+            fields = struct_value.get('fields')
+            for field in fields:
+                key = field.get('key')
+                value = self.get_inside_value(field.get('value'))
+                fields_list[key] = value
+            return fields_list
         return None
 
     def get_inside_list_value(self, list_value: dict):

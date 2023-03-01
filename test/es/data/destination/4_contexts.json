@@ -64,6 +64,14 @@
           },
           {
             "no-value-list": []
+          },
+          {
+            "struct-value": {
+              "inside-value": "struct"
+            }
+          },
+          {
+            "struct-value.original": "struct.original"
           }
         ]
       }
