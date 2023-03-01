@@ -19,6 +19,11 @@
       },
       {
         "parameter-4": "paramvalue4"
+      },
+      {
+        "struct-value": {
+          "inside-value": "struct"
+        }
       }
     ],
     "metadata": {

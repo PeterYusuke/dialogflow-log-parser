@@ -122,6 +122,8 @@ class ResponseHoconLogic(BaseHoconLogic):
             return value_hocon['number_value']
         if value_hocon.get('list_value', False) is not False:
             return self.get_inside_list_value(value_hocon['list_value'])
+        if value_hocon.get('struct_value', False) is not False:
+            return self.get_struct_value(value_hocon['struct_value'])
         return None
 
     def get_inside_list_value(self, list_value_hocon: ConfigTree):
