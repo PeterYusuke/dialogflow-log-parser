@@ -151,9 +151,9 @@ class ResponseHoconLogic(BaseHoconLogic):
         fieldの中身をConfigTreeに変換する
         '''
         result = ''
-        if field_value_hocon.get('list_value', False):
+        if field_value_hocon.get('list_value', False) is not False:
             list_value = []
-            for value in field_value_hocon['list_value']['values']:
+            for value in field_value_hocon['list_value'].get('values', []):
                 list_value.append(self.get_field_value(value))
             else:
                 return list_value

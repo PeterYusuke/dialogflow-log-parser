@@ -84,3 +84,12 @@ class MainTest(TestCase):
         dest_dict = json.loads(dest)
 
         self.assertDictEqual(response_dict, dest_dict)
+
+    def test_empty_list(self):
+        response = self.get_conf_file('8_empty_list.conf')
+        dest = self.get_dest_file('8_empty_list.json')
+
+        response_dict = response_to_dict(response)
+        dest_dict = json.loads(dest)
+
+        self.assertDictEqual(response_dict, dest_dict)
