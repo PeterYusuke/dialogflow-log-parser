@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='dialogflow_log_parser',
-    version='0.0.3',
+    version='0.0.4',
     author='Peter Yusuke',
     author_email='yyamashita1201@gmail.com',
     description='parse dialogflow log string',
